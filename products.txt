@@ -1,0 +1,31 @@
+10
+Laptop
+A high-performance laptop with 16GB RAM and 512GB SSD.
+3999.99
+Smartphone
+A latest model smartphone with a 6.5-inch, foldable display and 128GB storage.
+1899.99
+Headphones
+Noise-cancelling over-ear headphones with Bluetooth connectivity.
+199.99
+Smartwatch
+A smartwatch with fitness tracking and heart rate monitoring.
+249.99
+Tablet
+A 10-inch tablet with 64GB storage and a high-resolution display.
+329.99
+Camera
+A digital camera with 24MP resolution and 4K video recording.
+949.99
+Printer
+A wireless all-in-one printer with scanning and copying functions.
+129.99
+Monitor
+A 27-inch 4K UHD monitor with HDR support.
+399.99
+Keyboard
+A mechanical keyboard with RGB backlighting.
+159.99
+Mouse
+A wireless ergonomic mouse with adjustable DPI.
+49.99
