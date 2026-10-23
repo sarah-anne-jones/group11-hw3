@@ -13,4 +13,3 @@ std::string product::product_info()
 
     return output.str();
 }
-//code for product struct here
