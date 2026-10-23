@@ -17,6 +17,7 @@ using namespace std;
 int main()
 {
     Store store1;
+
     ifstream people_file("people.txt");
     ifstream cards_file("credit_card.txt");
     ifstream products_file("products.txt");
@@ -28,7 +29,7 @@ int main()
         return 1;
     }
 
-    // Load credit card records and associate them with customer names.
+    // Read credit card records.
     struct CardRecord
     {
         string name;
@@ -37,18 +38,19 @@ int main()
 
     CardRecord cards[100];
     int card_count = 0;
-
     int number_of_cards = 0;
+
     cards_file >> number_of_cards;
     cards_file.ignore(numeric_limits<streamsize>::max(), '\n');
 
     for (int i = 0; i < number_of_cards && i < 100; ++i)
     {
-        string name;
+        string card_name;
         int card_number;
-        double limit, balance;
+        double limit;
+        double balance;
 
-        if (!getline(cards_file, name))
+        if (!getline(cards_file, card_name))
             break;
 
         if (!(cards_file >> card_number >> limit >> balance))
@@ -56,20 +58,21 @@ int main()
             cerr << "Error reading credit card data." << endl;
             return 1;
         }
+
         cards_file.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        cards[card_count].name = name;
+        cards[card_count].name = card_name;
         cards[card_count].card.cc_number = card_number;
         cards[card_count].card.limit = limit;
         cards[card_count].card.current_balance = balance;
         ++card_count;
     }
 
-    // Load people records.
-    int customer_count = 0;
-    string name, phone;
+    // Read customer records.
+    string name;
+    string phone;
 
-    while (customer_count < 100 && getline(people_file, name))
+    while (store1.num_customers() < 100 && getline(people_file, name))
     {
         if (name.empty())
             continue;
@@ -78,6 +81,7 @@ int main()
             break;
 
         address home;
+
         if (!getline(people_file, home.address_line1))
             break;
         if (!getline(people_file, home.address_line2))
@@ -104,17 +108,17 @@ int main()
 
         if (!card_found)
         {
-            cerr << "Warning: No card found for " << name << endl;
+            cerr << "Warning: No credit card found for "
+                 << name << endl;
         }
 
         Person customer(name, phone, home, customer_card);
-
-        if (store1.add_customer(customer))
-            ++customer_count;
+        store1.add_customer(customer);
     }
 
-    // Load products.
+    // Read product records.
     int number_of_products = 0;
+
     products_file >> number_of_products;
     products_file.ignore(numeric_limits<streamsize>::max(), '\n');
 
@@ -133,10 +137,11 @@ int main()
         store1.add_product(item);
     }
 
+    // Display the initial store information.
     cout << "Store info before transactions:" << endl << endl;
     cout << store1.store_info() << endl;
 
-    // Generate between 11 and 99 attempted transactions.
+    // Generate between 11 and 99 purchase attempts.
     srand(static_cast<unsigned int>(time(nullptr)));
     int attempts = 11 + rand() % 89;
 
@@ -162,19 +167,20 @@ int main()
 
         if (success)
         {
-            cout << "Transaction " << i + 1
-                 << " successful: " << customer.name()
-                 << " purchased " << quantity << " of "
-                 << item.name << "." << endl;
+            cout << "Transaction " << i + 1 << " successful: "
+                 << customer.name() << " purchased "
+                 << quantity << " of " << item.name << "."
+                 << endl;
         }
         else
         {
-            cout << "Transaction " << i + 1
-                 << " unsuccessful for " << customer.name()
-                 << " purchasing " << item.name << "." << endl;
+            cout << "Transaction " << i + 1 << " unsuccessful for "
+                 << customer.name() << " purchasing "
+                 << item.name << "." << endl;
         }
     }
 
+    // Display final store information.
     cout << "\nStore info after transactions:" << endl << endl;
     cout << store1.store_info() << endl;
 
