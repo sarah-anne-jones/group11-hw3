@@ -71,7 +71,11 @@ int main()
     // Read customer records.
     string name;
     string phone;
-
+    int num_of_customers = 0;
+    
+    people_file >> num_of_customers;
+    people_file.ignore(numeric_limits<streamsize>::max(), '\n');
+    
     while (store1.num_customers() < 100 && getline(people_file, name))
     {
         if (name.empty())
