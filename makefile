@@ -3,25 +3,25 @@ CC=g++
 all: main.o address.o credit_card.o person.o product.o store.o transaction.o
 	$(CC) -std=c++11 main.o address.o credit_card.o person.o product.o store.o transaction.o
 
-main: main.o
+main.o: main.cpp
 	$(CC) -c -std=c++11 main.cpp
 
-person: person.cpp
+person.o: person.cpp
 	$(CC) -c -std=c++11 person.cpp
  
-store: store.cpp
+store.o: store.cpp
 	$(CC) -c -std=c++11 store.cpp
  
-credit_card: credit_card.cpp
+credit_card.o: credit_card.cpp
 	$(CC) -c -std=c++11 credit_card.cpp
  
-address: address.cpp
+address.o: address.cpp
 	$(CC) -c -std=c++11 address.cpp
  
-product: product.cpp
+product.o: product.cpp
 	$(CC) -c -std=c++11 product.cpp
  
-transaction: transaction.cpp
+transaction.o: transaction.cpp
 	$(CC) -c -std=c++11 transaction.cpp
  
 clean:
