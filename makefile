@@ -1,13 +1,13 @@
 CC=g++
 
 all: main.o address.o credit_card.o person.o product.o store.o transaction.o
-    $(CC) -std=c++11 main.o address.o credit_card.o person.o product.o store.o transaction.o
+	$(CC) -std=c++11 main.o address.o credit_card.o person.o product.o store.o transaction.o
 
 main: main.o
-    $(CC) -c -std=c++11 main.cpp
+	$(CC) -c -std=c++11 main.cpp
 
 person: person.cpp
-    $(CC) -c -std=c++11 person.cpp
+	$(CC) -c -std=c++11 person.cpp
  
 store: store.cpp
 	$(CC) -c -std=c++11 store.cpp
